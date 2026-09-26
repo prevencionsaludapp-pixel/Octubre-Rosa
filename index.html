@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octubre Rosa - Prevención e Información sobre Cáncer de Mama</title>
+  
+  <style>
+    :root {
+      --primary: #db2777;
+      --primary-hover: #be185d;
+      --primary-light: #fce7f3;
+      --primary-dark: #831843;
+      --rose-50: #fff1f2;
+      --rose-100: #ffe4e6;
+      --rose-200: #fecdd3;
+      --rose-500: #f43f5e;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --bg-gradient: linear-gradient(135deg, #fdf2f8 0%, #fff1f2 50%, #ffffff 100%);
+      --card-bg: #ffffff;
+      --shadow: 0 10px 25px -5px rgba(219, 39, 119, 0.12), 0 8px 10px -6px rgba(219, 39, 119, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(219, 39, 119, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      --radius: 18px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 160px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(219, 39, 119, 0.08);
+      border-bottom: 1px solid var(--primary-light);
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .simple-heart-svg {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 3px 6px rgba(219, 39, 119, 0.25));
+    }
+
+    .nav-toggle { display: none; }
+    
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .nav-tab-label {
+      padding: 8px 16px;
+      background: var(--rose-50);
+      color: var(--primary-dark);
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-tab-label:hover {
+      background: var(--primary-light);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #tab-inicio:checked ~ main #sec-inicio,
+    #tab-riesgo:checked ~ main #sec-riesgo,
+    #tab-senales:checked ~ main #sec-senales,
+    #tab-prevencion:checked ~ main #sec-prevencion,
+    #tab-calculadora:checked ~ main #sec-calculadora,
+    #tab-mitos:checked ~ main #sec-mitos,
+    #tab-quiz:checked ~ main #sec-quiz,
+    #tab-compromiso:checked ~ main #sec-compromiso,
+    #tab-estadisticas:checked ~ main #sec-estadisticas {
+      display: block;
+    }
+
+    #tab-inicio:checked ~ .header .nav-tabs label[for="tab-inicio"],
+    #tab-riesgo:checked ~ .header .nav-tabs label[for="tab-riesgo"],
+    #tab-senales:checked ~ .header .nav-tabs label[for="tab-senales"],
+    #tab-prevencion:checked ~ .header .nav-tabs label[for="tab-prevencion"],
+    #tab-calculadora:checked ~ .header .nav-tabs label[for="tab-calculadora"],
+    #tab-mitos:checked ~ .header .nav-tabs label[for="tab-mitos"],
+    #tab-quiz:checked ~ .header .nav-tabs label[for="tab-quiz"],
+    #tab-compromiso:checked ~ .header .nav-tabs label[for="tab-compromiso"],
+    #tab-estadisticas:checked ~ .header .nav-tabs label[for="tab-estadisticas"] {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 10px rgba(219, 39, 119, 0.3);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      border: 1px solid rgba(251, 207, 232, 0.5);
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, rgba(252, 231, 243, 0.7) 0%, rgba(255, 255, 255, 1) 100%);
+      border-radius: var(--radius);
+      border: 2px solid var(--primary-light);
+    }
+
+    .hero-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px auto;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .hero p.subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 24px auto;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .info-box {
+      background: var(--rose-50);
+      padding: 18px;
+      border-radius: 14px;
+      border-left: 4px solid var(--primary);
+      text-align: left;
+    }
+
+    .info-box h3 {
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .risk-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group label.title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .custom-option {
+      position: relative;
+      display: block;
+    }
+
+    .custom-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      cursor: pointer;
+    }
+
+    .custom-option .opt-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 16px;
+      background: #f9fafb;
+      border: 2px solid #e5e7eb;
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .custom-option:hover .opt-card {
+      background: var(--rose-50);
+      border-color: var(--rose-200);
+    }
+
+    .custom-option input[type="radio"]:checked + .opt-card {
+      border-color: var(--primary) !important;
+      background: var(--primary-light) !important;
+      color: var(--primary-dark) !important;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(219, 39, 119, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .custom-option input[type="radio"]:checked + .opt-card::before {
+      content: "✓ ";
+      margin-right: 6px;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .risk-panel {
+      display: none;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 15px;
+      border: 2px solid var(--primary);
+      background: var(--rose-50);
+      animation: fadeIn 0.3s ease;
+    }
+
+    #r-age-young:checked ~ #r-fam-none:checked ~ .risk-results #res-young-clean,
+    #r-age-young:checked ~ #r-fam-direct:checked ~ .risk-results #res-young-risk,
+    #r-age-mid:checked ~ #r-fam-none:checked ~ .risk-results #res-mid-clean,
+    #r-age-mid:checked ~ #r-fam-direct:checked ~ .risk-results #res-mid-risk,
+    #r-age-senior:checked ~ #r-fam-none:checked ~ .risk-results #res-senior-clean,
+    #r-age-senior:checked ~ #r-fam-direct:checked ~ .risk-results #res-senior-risk {
+      display: block;
+    }
+
+    .disclaimer {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 1px solid var(--rose-200);
+      font-style: italic;
+    }
+
+    .alarm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 15px;
+    }
+
+    .alarm-card {
+      background: var(--card-bg);
+      border: 2px solid var(--rose-100);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      position: relative;
+    }
+
+    .alarm-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .alarm-icon-container {
+      width: 70px;
+      height: 70px;
+      background: var(--rose-50);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px auto;
+      border: 2px solid var(--primary-light);
+    }
+
+    .alarm-svg {
+      width: 38px;
+      height: 38px;
+      fill: var(--primary);
+    }
+
+    .alarm-card h3 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .alarm-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .prevention-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .prev-card {
+      background: linear-gradient(145deg, #ffffff, var(--rose-50));
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--rose-100);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .prev-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .prev-card h3 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .calc-toggle { display: none; }
+    
+    .calc-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .calc-label {
+      padding: 10px;
+      text-align: center;
+      background: var(--rose-50);
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    #age-20:checked ~ .calc-tabs label[for="age-20"],
+    #age-40:checked ~ .calc-tabs label[for="age-40"],
+    #age-50:checked ~ .calc-tabs label[for="age-50"],
+    #age-70:checked ~ .calc-tabs label[for="age-70"] {
+      background: var(--primary);
+      color: white;
+    }
+
+    .calc-res-panel {
+      display: none;
+      background: var(--rose-50);
+      border-left: 5px solid var(--primary);
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    #age-20:checked ~ #res-20,
+    #age-40:checked ~ #res-40,
+    #age-50:checked ~ #res-50,
+    #age-70:checked ~ #res-70 {
+      display: block;
+    }
+
+    .myth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rose-100);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .myth-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+    }
+
+    .myth-options {
+      display: flex;
+      gap: 12px;
+    }
+
+    .myth-radio { display: none; }
+
+    .myth-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 25px;
+      border: 2px solid var(--primary-light);
+      background: var(--rose-50);
+      color: var(--primary-dark);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .myth-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .myth-feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .myth-correct {
+      background: #dcfce7;
+      border: 2px solid #22c55e;
+      color: #14532d;
+    }
+
+    .myth-incorrect {
+      background: #fee2e2;
+      border: 2px solid #ef4444;
+      color: #7f1d1d;
+    }
+
+    .m-opt-mito-corr:checked ~ .myth-options label[for*="-m"],
+    .m-opt-verd-corr:checked ~ .myth-options label[for*="-v"] {
+      background: #22c55e;
+      color: white;
+      border-color: #16a34a;
+    }
+
+    .m-opt-mito-inc:checked ~ .myth-options label[for*="-m"],
+    .m-opt-verd-inc:checked ~ .myth-options label[for*="-v"] {
+      background: #ef4444;
+      color: white;
+      border-color: #dc2626;
+    }
+
+    .m-opt-mito-corr:checked ~ .fb-correct,
+    .m-opt-verd-corr:checked ~ .fb-correct {
+      display: block;
+    }
+
+    .m-opt-mito-inc:checked ~ .fb-incorrect,
+    .m-opt-verd-inc:checked ~ .fb-incorrect {
+      display: block;
+    }
+
+    .quiz-q-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--rose-100);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .quiz-q-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .quiz-radio { display: none; }
+
+    .quiz-opt-label {
+      display: block;
+      padding: 12px 16px;
+      background: #f9fafb;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .quiz-opt-label:hover {
+      background: var(--rose-50);
+      border-color: var(--primary-light);
+    }
+
+    .quiz-correct-choice:checked + .quiz-opt-label {
+      background: #dcfce7;
+      border-color: #22c55e;
+      color: #15803d;
+      font-weight: 700;
+    }
+
+    .quiz-wrong-choice:checked + .quiz-opt-label {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #b91c1c;
+      font-weight: 700;
+    }
+
+    .quiz-fb {
+      display: none;
+      margin-top: 10px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      animation: popIn 0.3s ease-out;
+    }
+
+    .quiz-correct-choice:checked ~ .fb-q-correct {
+      display: block;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #14532d;
+    }
+
+    .quiz-wrong-choice:checked ~ .fb-q-wrong {
+      display: block;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .commit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .commit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--rose-50);
+      padding: 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .commit-item:hover {
+      background: var(--rose-100);
+    }
+
+    .commit-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    #commit-trigger { display: none; }
+
+    .celebration-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(131, 24, 67, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #commit-trigger:checked ~ .celebration-modal {
+      display: flex;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .celebration-card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px 25px;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 3px solid var(--primary-light);
+      overflow: hidden;
+    }
+
+    .celebration-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      animation: pulse 1.2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 20px;
+      display: inline-block;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .confetti-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      top: -20px;
+      opacity: 0.8;
+      border-radius: 50%;
+      animation: fall 2.5s infinite linear;
+    }
+
+    .confetti-piece:nth-child(1) { left: 10%; background: #f43f5e; animation-delay: 0s; }
+    .confetti-piece:nth-child(2) { left: 25%; background: #db2777; animation-delay: 0.4s; }
+    .confetti-piece:nth-child(3) { left: 40%; background: #fecdd3; animation-delay: 0.8s; }
+    .confetti-piece:nth-child(4) { left: 60%; background: #be185d; animation-delay: 0.2s; }
+    .confetti-piece:nth-child(5) { left: 75%; background: #f43f5e; animation-delay: 0.6s; }
+    .confetti-piece:nth-child(6) { left: 90%; background: #db2777; animation-delay: 1s; }
+
+    @keyframes fall {
+      to {
+        transform: translateY(450px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .dash-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--rose-500) 100%);
+      color: white;
+      padding: 20px 18px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
+    }
+
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      opacity: 0.95;
+      font-weight: 600;
+    }
+
+    .stats-block {
+      background: #fafafa;
+      border: 1px solid var(--rose-100);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .stats-block-title {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bar-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .bar-bg {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--rose-500) 100%);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .stats-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #86efac;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--primary-dark);
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto 12px auto;
+      color: var(--rose-100);
+    }
+
+    .floating-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+      transition: var(--transition);
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .btn-order-form {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--rose-500) 100%);
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-whatsapp:hover {
+      background: #20ba5a;
+    }
+
+    .action-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .wa-official-icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.7rem; }
+      .nav-tab-label { font-size: 0.8rem; padding: 6px 12px; }
+      .floating-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        align-items: stretch;
+      }
+      .floating-btn {
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Toggles -->
+  <input type="radio" name="main-tab" id="tab-inicio" class="nav-toggle" checked>
+  <input type="radio" name="main-tab" id="tab-riesgo" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-senales" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-prevencion" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-calculadora" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-mitos" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-quiz" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-compromiso" class="nav-toggle">
+  <input type="radio" name="main-tab" id="tab-estadisticas" class="nav-toggle">
+
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="brand">
+        <!-- Logotipo: Corazón Simple Rosa Vectorial -->
+        <svg class="simple-heart-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#f43f5e" stroke="#db2777" stroke-width="1.5"/>
+        </svg>
+        <span>Octubre Rosa</span>
+      </a>
+    </div>
+
+    <nav class="nav-tabs">
+      <label for="tab-inicio" class="nav-tab-label">🏠 Inicio</label>
+      <label for="tab-riesgo" class="nav-tab-label">🎗️ Tu Riesgo</label>
+      <label for="tab-senales" class="nav-tab-label">🔎 Señales</label>
+      <label for="tab-prevencion" class="nav-tab-label">🩷 Prevención</label>
+      <label for="tab-calculadora" class="nav-tab-label">📅 Calculadora</label>
+      <label for="tab-mitos" class="nav-tab-label">🧠 Mitos</label>
+      <label for="tab-quiz" class="nav-tab-label">🎮 Quiz</label>
+      <label for="tab-compromiso" class="nav-tab-label">❤️ Compromiso</label>
+      <label for="tab-estadisticas" class="nav-tab-label">📊 Estadísticas</label>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="sec-inicio" class="tab-content">
+      <div class="hero">
+        <svg class="simple-heart-svg hero-logo" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#f43f5e" stroke="#db2777" stroke-width="1.5"/>
+        </svg>
+        <h1>Octubre Rosa</h1>
+        <p class="subtitle">La prevención y la detección temprana son tus mejores aliadas. Conocé tus hábitos y programá tus controles de salud.</p>
+        <label for="tab-riesgo" class="btn">Empezar Evaluación ➔</label>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h3>¿Qué es el cáncer de mama?</h3>
+          <p>Es una proliferación celular en el tejido mamario. Detectado a tiempo en sus etapas iniciales, cuenta con más del 90% de probabilidades de curación.</p>
+        </div>
+        <div class="info-box">
+          <h3>Importancia de la Detección Precoz</h3>
+          <p>Permite identificar cambios antes de que sean palpables o generen síntomas, mejorando significativamente la eficacia de los tratamientos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-riesgo" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">🎗️ Evaluación Orientativa de Riesgo</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Elegí tus características para ofrecerte sugerencias personalizadas de salud (tus selecciones actualizarán las estadísticas anónimas):</p>
+
+        <div class="risk-form">
+          <input type="radio" name="r-age" id="r-age-young" class="nav-toggle" checked>
+          <input type="radio" name="r-age" id="r-age-mid" class="nav-toggle">
+          <input type="radio" name="r-age" id="r-age-senior" class="nav-toggle">
+
+          <input type="radio" name="r-fam" id="r-fam-none" class="nav-toggle" checked>
+          <input type="radio" name="r-fam" id="r-fam-direct" class="nav-toggle">
+
+          <div class="form-group">
+            <label class="title">1. Rango de Edad:</label>
+            <div class="options-grid">
+              <label class="custom-option">
+                <input type="radio" name="r-age-dummy" id="dummy-age-1" checked onclick="document.getElementById('r-age-young').click(); trackAgeChoice('<30');">
+                <span class="opt-card">Menor de 40 años</span>
+              </label>
+              <label class="custom-option">
+                <input type="radio" name="r-age-dummy" id="dummy-age-2" onclick="document.getElementById('r-age-mid').click(); trackAgeChoice('40-49');">
+                <span class="opt-card">40 a 49 años</span>
+              </label>
+              <label class="custom-option">
+                <input type="radio" name="r-age-dummy" id="dummy-age-3" onclick="document.getElementById('r-age-senior').click(); trackAgeChoice('50+');">
+                <span class="opt-card">50 años o más</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="title">2. Antecedentes Familiares Directos (Madre/Hermana/Hija):</label>
+            <div class="options-grid">
+              <label class="custom-option">
+                <input type="radio" name="r-fam-dummy" id="dummy-fam-1" checked onclick="document.getElementById('r-fam-none').click(); trackAntecedents(false);">
+                <span class="opt-card">Sin antecedentes directos</span>
+              </label>
+              <label class="custom-option">
+                <input type="radio" name="r-fam-dummy" id="dummy-fam-2" onclick="document.getElementById('r-fam-direct').click(); trackAntecedents(true);">
+                <span class="opt-card">Con antecedentes directos</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="risk-results">
+            <div id="res-young-clean" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta General: Grupo de Bajo Riesgo Relativo</h3>
+              <p>Al ser menor de 40 años sin antecedentes familiares de primer grado, se recomienda:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Examen clínico mamario anual con tu médico o ginecólogo.</li>
+                <li>Conocer tu cuerpo mediante la autoobservación frecuente.</li>
+              </ul>
+            </div>
+
+            <div id="res-young-risk" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta Especial: Evaluación Temprana Recomendada</h3>
+              <p>Al contar con antecedentes de primer grado antes de los 40 años:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Consultar con tu especialista para definir el inicio anticipado de estudios (como ecografía o mamografía).</li>
+                <li>Se sugiere iniciar tamizajes 10 años antes de la edad en que se diagnosticó al familiar más joven.</li>
+              </ul>
+            </div>
+
+            <div id="res-mid-clean" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta de Inicio de Tamizaje</h3>
+              <p>En la década de los 40 años es la etapa estándar para planificar controles imagenológicos:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Conversar con tu médico sobre la realización de tu primera Mamografía.</li>
+                <li>Realizar examen clínico con profesional de forma anual.</li>
+              </ul>
+            </div>
+
+            <div id="res-mid-risk" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta Prioritaria: Control Estricto</h3>
+              <p>Presentás combinación de edad de inicio y antecedentes de primer grado:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Es fundamental coordinar tu Mamografía anual de control junto con Ecografía Mamaria complementaria si el médico lo aconseja.</li>
+              </ul>
+            </div>
+
+            <div id="res-senior-clean" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta Habitual de Monitoreo Regular</h3>
+              <p>Rango de edad con mayor indicación para estudios de tamizaje periódico:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Se recomienda realizar la Mamografía de rutina cada 1 o 2 años según criterio de tu médico.</li>
+                <li>Mantener estilo de vida saludable y controles clínicos continuos.</li>
+              </ul>
+            </div>
+
+            <div id="res-senior-risk" class="risk-panel">
+              <h3 style="color:var(--primary-dark); margin-bottom:8px;">🌸 Pauta Prioritaria: Monitoreo Anual Continuo</h3>
+              <p>Control continuo indicado por edad y factores hereditarios:</p>
+              <ul style="margin: 8px 0 8px 20px; color:var(--text-muted);">
+                <li>Mamografía e inspección clínica anual estricta.</li>
+                <li>Consulta periódica médica sin omitir períodos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            ⚠️ <strong>Nota:</strong> Tu resultado sirve para identificar la recomendación estándar y conversar adecuadamente con un profesional de la salud.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-senales" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">🔎 Señales de Alarma Visuales e Interactivas</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Es fundamental realizar una autoobservación periódica. Si detectás alguna de estas señales, consultá a tu médico sin demoras:</p>
+
+        <div class="alarm-grid">
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="14" cy="10" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>1. Bulto o Nódulo Nuevo</h3>
+            <p>Masa o enduringecimiento palpable en la mama o en la zona axilar, generalmente indoloro y de consistencia firme.</p>
+          </div>
+
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>2. Cambios en Tamaño o Forma</h3>
+            <p>Aumento o deformación visible y asimétrica de una de las mamas no relacionada con el ciclo menstrual.</p>
+          </div>
+
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </div>
+            <h3>3. Alteraciones en la Piel</h3>
+            <p>Hundimientos, hoyuelos, piel de naranja, enrojecimiento, descamación o textura irregular en el área mamaria.</p>
+          </div>
+
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>4. Retracción del Pezón</h3>
+            <p>Inversión o hundimiento del pezón hacia adentro o cambios repentinos en la dirección a la que apunta.</p>
+          </div>
+
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>5. Secreción Anormal</h3>
+            <p>Salida espontánea de fluido no lácteo o sanguinolento por el pezón sin necesidad de compresión.</p>
+          </div>
+
+          <div class="alarm-card">
+            <div class="alarm-icon-container">
+              <svg class="alarm-svg" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
+            <h3>6. Dolor Persistente</h3>
+            <p>Molestia o dolor localizado continuo en una mama o en la axila que no varía con el periodo menstrual.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-prevencion" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">🩷 Hábitos Saludables de Prevención</h2>
+        <div class="prevention-grid">
+          <div class="prev-card">
+            <span class="prev-icon">🏃‍♀️</span>
+            <h3>Ejercicio Frecuente</h3>
+            <p>Disminuye el riesgo relativo al regular niveles hormonales.</p>
+          </div>
+          <div class="prev-card">
+            <span class="prev-icon">🥗</span>
+            <h3>Alimentación Equilibrada</h3>
+            <p>Rica en vegetales, frutas y nutrientes naturales.</p>
+          </div>
+          <div class="prev-card">
+            <span class="prev-icon">🚭</span>
+            <h3>Sin Tabaco ni Alcohol</h3>
+            <p>Reducir o evitar estos factores disminuye significativamente los riesgos.</p>
+          </div>
+          <div class="prev-card">
+            <span class="prev-icon">🩺</span>
+            <h3>Controles Periódicos</h3>
+            <p>Planificá tu control médico una vez al año.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-calculadora" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">📅 ¿Cuándo me tengo que controlar?</h2>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">Seleccioná tu edad aproximada para orientarte sobre los controles vigentes:</p>
+
+        <input type="radio" name="calc-age" id="age-20" class="calc-toggle" checked onclick="trackScreeningState('pending')">
+        <input type="radio" name="calc-age" id="age-40" class="calc-toggle" onclick="trackScreeningState('ok')">
+        <input type="radio" name="calc-age" id="age-50" class="calc-toggle" onclick="trackScreeningState('ok')">
+        <input type="radio" name="calc-age" id="age-70" class="calc-toggle" onclick="trackScreeningState('ok')">
+
+        <div class="calc-tabs">
+          <label for="age-20" class="calc-label">20 - 39 años</label>
+          <label for="age-40" class="calc-label">40 - 49 años</label>
+          <label for="age-50" class="calc-label">50 - 69 años</label>
+          <label for="age-70" class="calc-label">70+ años</label>
+        </div>
+
+        <div id="res-20" class="calc-res-panel">
+          <h4 style="color:var(--primary-dark);">Recomendación 20 a 39 años:</h4>
+          <p>Examen clínico médico regular cada 1 a 3 años. Autoobservación constante.</p>
+        </div>
+        <div id="res-40" class="calc-res-panel">
+          <h4 style="color:var(--primary-dark);">Recomendación 40 a 49 años:</h4>
+          <p>Consulta médica anual y evaluación para iniciar la mamografía de base.</p>
+        </div>
+        <div id="res-50" class="calc-res-panel">
+          <h4 style="color:var(--primary-dark);">Recomendación 50 a 69 años:</h4>
+          <p>Mamografía de tamizaje cada 1 o 2 años en forma prioritaria.</p>
+        </div>
+        <div id="res-70" class="calc-res-panel">
+          <h4 style="color:var(--primary-dark);">Recomendación 70 años o más:</h4>
+          <p>Seguimiento continuo según las recomendaciones individuales de tu profesional de salud.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-mitos" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">🧠 Mitos y Verdades sobre el Cáncer de Mama</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Tocá tu respuesta para descubrir la explicación médica y poner a prueba tu conocimiento:</p>
+
+        <div class="myth-card">
+          <p class="myth-question">1. "Si no tengo antecedentes familiares directos, no puedo tener cáncer de mama."</p>
+          <input type="radio" name="m1" id="m1-v" class="myth-radio m-opt-verd-inc" onclick="trackInteractiveAction()">
+          <input type="radio" name="m1" id="m1-m" class="myth-radio m-opt-mito-corr" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m1-v" class="myth-btn">Verdad</label>
+            <label for="m1-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Excelente! Es un MITO.</strong> Más del 75% de las personas diagnosticadas con cáncer de mama no tienen ningún antecedente familiar directo.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es un MITO.</strong> La gran mayoría de los casos ocurren en personas sin familiares afectados. Por eso los controles son para todas.
+          </div>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-question">2. "La mamografía permite detectar tumores pequeños antes de que sean palpables."</p>
+          <input type="radio" name="m2" id="m2-v" class="myth-radio m-opt-verd-corr" onclick="trackInteractiveAction()">
+          <input type="radio" name="m2" id="m2-m" class="myth-radio m-opt-mito-inc" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m2-v" class="myth-btn">Verdad</label>
+            <label for="m2-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Muy bien! Es VERDAD.</strong> La mamografía detecta lesiones milimétricas años antes de que se puedan sentir al tacto, aumentando las chances de curación.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es VERDAD.</strong> La mamografía es la tecnología más efectiva para identificar cambios tempranos imperceptibles al tacto.
+          </div>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-question">3. "Un golpe o traumatismo en la mama puede generar cáncer."</p>
+          <input type="radio" name="m3" id="m3-v" class="myth-radio m-opt-verd-inc" onclick="trackInteractiveAction()">
+          <input type="radio" name="m3" id="m3-m" class="myth-radio m-opt-mito-corr" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m3-v" class="myth-btn">Verdad</label>
+            <label for="m3-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Correcto! Es un MITO.</strong> Los golpes pueden provocar hematomas o necrosis grasa temporal, pero no transforman las células normales en malignas.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es un MITO.</strong> Un traumatismo no origina células cancerígenas; a veces el dolor del golpe lleva a descubrir un nódulo preexistente.
+          </div>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-question">4. "El autoexamen de mama reemplaza a la mamografía médica anual."</p>
+          <input type="radio" name="m4" id="m4-v" class="myth-radio m-opt-verd-inc" onclick="trackInteractiveAction()">
+          <input type="radio" name="m4" id="m4-m" class="myth-radio m-opt-mito-corr" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m4-v" class="myth-btn">Verdad</label>
+            <label for="m4-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Excelente! Es un MITO.</strong> El autoexamen ayuda a conocer la anatomía, pero no reemplaza la sensibilidad de los estudios por imágenes.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es un MITO.</strong> El autoexamen complementa la prevención, pero la mamografía es la única que detecta lesiones subclínicas.
+          </div>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-question">5. "Mantener un peso saludable y hacer ejercicio reduce el riesgo."</p>
+          <input type="radio" name="m5" id="m5-v" class="myth-radio m-opt-verd-corr" onclick="trackInteractiveAction()">
+          <input type="radio" name="m5" id="m5-m" class="myth-radio m-opt-mito-inc" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m5-v" class="myth-btn">Verdad</label>
+            <label for="m5-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Exacto! Es VERDAD.</strong> La actividad física regula los niveles estrogénicos e inflamatorios, reduciendo el riesgo hasta en un 20%.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es VERDAD.</strong> Los hábitos de vida saludables son factores de protección científicamente probados.
+          </div>
+        </div>
+
+        <div class="myth-card">
+          <p class="myth-question">6. "El cáncer de mama solo afecta a mujeres de edad avanzada."</p>
+          <input type="radio" name="m6" id="m6-v" class="myth-radio m-opt-verd-inc" onclick="trackInteractiveAction()">
+          <input type="radio" name="m6" id="m6-m" class="myth-radio m-opt-mito-corr" onclick="trackInteractiveAction()">
+          <div class="myth-options">
+            <label for="m6-v" class="myth-btn">Verdad</label>
+            <label for="m6-m" class="myth-btn">Mito</label>
+          </div>
+          <div class="myth-feedback fb-correct myth-correct">
+            🎉 <strong>¡Correcto! Es un MITO.</strong> Aunque la frecuencia aumenta con la edad, también puede diagnosticarse en personas jóvenes.
+          </div>
+          <div class="myth-feedback fb-incorrect myth-incorrect">
+            ❌ <strong>Respuesta incorrecta. Es un MITO.</strong> La edad es un factor de riesgo, pero la prevención y atención debe iniciar desde la juventud.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-quiz" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">🎮 Mini Quiz Evaluativo de Conocimientos</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">Demostrá lo que aprendiste respondiendo estas preguntas sobre prevención:</p>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">1. ¿Cuál de estos factores de riesgo de salud SÍ es modificable?</p>
+          <input type="radio" name="q1" id="q1-a" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q1-a" class="quiz-opt-label">A. La edad avanzada</label>
+          
+          <input type="radio" name="q1" id="q1-b" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q1-b" class="quiz-opt-label">B. El nivel de actividad física diaria</label>
+          
+          <input type="radio" name="q1" id="q1-c" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q1-c" class="quiz-opt-label">C. La predisposición genética familiar</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Correcto!</strong> La actividad física, la alimentación y evitar el consumo de tabaco son factores modificables.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>B</strong>. Los factores genéticos y la edad no se pueden modificar, pero tus hábitos sí.</div>
+        </div>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">2. ¿A partir de qué edad se recomienda de forma general la primera mamografía de control?</p>
+          <input type="radio" name="q2" id="q2-a" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q2-a" class="quiz-opt-label">A. A los 18 años</label>
+          
+          <input type="radio" name="q2" id="q2-b" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q2-b" class="quiz-opt-label">B. A los 40 años (o antes con antecedentes directos)</label>
+          
+          <input type="radio" name="q2" id="q2-c" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q2-c" class="quiz-opt-label">C. Solamente al superar los 65 años</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Excelente!</strong> A partir de los 40 años se sugiere iniciar la evaluación mamográfica de rutina.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>B</strong>. Salvo indicación médica previa por antecedentes, los 40 años son el estándar.</div>
+        </div>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">3. ¿Qué cambio en el pezón debe ser evaluado como señal de alarma?</p>
+          <input type="radio" name="q3" id="q3-a" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q3-a" class="quiz-opt-label">A. Sensibilidad leve previa a la menstruación</label>
+          
+          <input type="radio" name="q3" id="q3-b" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q3-b" class="quiz-opt-label">B. Retracción o hundimiento reciente del pezón</label>
+          
+          <input type="radio" name="q3" id="q3-c" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q3-c" class="quiz-opt-label">C. Pigmentación normal idéntica en ambas mamas</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Respuesta acertada!</strong> Un pezón invertido o retraído recientemente requiere pronta consulta.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>B</strong>. La retracción o secreción anormal son señales de alarma clave.</div>
+        </div>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">4. Si tenés antecedentes directos (madre o hermana) con cáncer de mama, ¿qué debés hacer?</p>
+          <input type="radio" name="q4" id="q4-a" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q4-a" class="quiz-opt-label">A. Consultar para comenzar controles antes de los 40 años</label>
+          
+          <input type="radio" name="q4" id="q4-b" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q4-b" class="quiz-opt-label">B. No hacer nada distinto hasta cumplir 60 años</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Muy bien!</strong> Con antecedentes de primer grado se recomienda iniciar controles anticipados.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>A</strong>. Es importante consensuar con el médico un plan de tamizaje temprano.</div>
+        </div>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">5. ¿Cuál es el beneficio principal de detectar un tumor en etapas tempranas?</p>
+          <input type="radio" name="q5" id="q5-a" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q5-a" class="quiz-opt-label">A. Evitar totalmente las visitas al médico</label>
+          
+          <input type="radio" name="q5" id="q5-b" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q5-b" class="quiz-opt-label">B. Alcanzar más del 90% de probabilidades de curación</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Espectacular!</strong> La detección oportuna ofrece pronósticos highly favorables.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>B</strong>. La cura es posible en más del 90% de casos precoces.</div>
+        </div>
+
+        <div class="quiz-q-card">
+          <p class="quiz-q-title">6. ¿Qué característica suele presentar un bulto mamario sospechoso?</p>
+          <input type="radio" name="q6" id="q6-a" class="quiz-radio quiz-correct-choice" onclick="trackInteractiveAction()">
+          <label for="q6-a" class="quiz-opt-label">A. Es duro, firme y no desaparece con el ciclo</label>
+          
+          <input type="radio" name="q6" id="q6-b" class="quiz-radio quiz-wrong-choice" onclick="trackInteractiveAction()">
+          <label for="q6-b" class="quiz-opt-label">B. Aparece y desaparece todos los días</label>
+
+          <div class="quiz-fb fb-q-correct">✨ <strong>¡Correcto!</strong> Un nódulo consistente e indoloro que persiste debe ser examinado.</div>
+          <div class="quiz-fb fb-q-wrong">💡 <strong>Incorrecto.</strong> La respuesta correcta es la <strong>A</strong>. La consistencia firme y persistente es la pauta de consulta.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-compromiso" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">❤️ Tu Compromiso de Salud</h2>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">Marcá las acciones que vas a realizar este mes para cuidar de vos:</p>
+
+        <div class="commit-list">
+          <label class="commit-item">
+            <input type="checkbox" id="chk-schedule">
+            <span>Agendar mi turno de control de salud anual.</span>
+          </label>
+          <label class="commit-item">
+            <input type="checkbox" id="chk-consult">
+            <span>Conversar sobre antecedentes familiares con mi médico/a.</span>
+          </label>
+          <label class="commit-item">
+            <input type="checkbox" id="chk-share">
+            <span>Compartir esta información con amigas, compañeras o familiares.</span>
+          </label>
+          <label class="commit-item">
+            <input type="checkbox" id="chk-exercise">
+            <span>Sumar hábito de actividad física esta semana.</span>
+          </label>
+        </div>
+
+        <input type="checkbox" id="commit-trigger" onclick="submitCommitment();">
+        <label for="commit-trigger" class="btn" style="width:100%; font-size:1.1rem; padding:15px;">
+          ✨ ¡Me comprometo!
+        </label>
+
+        <div class="celebration-modal">
+          <div class="celebration-card">
+            <div class="confetti-wrapper">
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+            </div>
+
+            <div class="celebration-icon">🎉🌸</div>
+            <h2 style="color:var(--primary-dark); margin-bottom:10px;">¡Felicitaciones!</h2>
+            <p style="color:var(--text-main); font-weight:600; font-size:1.05rem;">
+              Asumiste un compromiso valioso con tu salud y bienestar.
+            </p>
+            <p style="color:var(--text-muted); margin-top:8px; font-size:0.95rem;">
+              Recordá que cuidar de vos es el primer paso para estar bien con los demás.
+            </p>
+            <label for="commit-trigger" class="close-btn">Continuar</label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-estadisticas" class="tab-content">
+      <div class="card">
+        <h2 class="card-title">📊 Estadísticas Globales Anónimas de la Campaña</h2>
+        
+        <div class="stats-live-badge">
+          <div class="live-dot"></div>
+          <span>Monitoreo dinámico e interactivo activado</span>
+        </div>
+
+        <p style="margin-bottom: 20px; color: var(--text-muted);">
+          Métricas consolidadas de participación comunitaria en tiempo real. Todos los datos son agregados en forma anónima sin guardar información clínica personal.
+        </p>
+
+        <!-- KPI High-Level Metrics -->
+        <div class="dash-metrics">
+          <div class="metric-card">
+            <div class="metric-value" id="stat-total-participantes">0</div>
+            <div class="metric-label">Personas que Participaron</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="stat-total-compromisos">0</div>
+            <div class="metric-label">Compromisos de Salud Asumidos</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="stat-mamo-dia">0%</div>
+            <div class="metric-label">Mamografías de Rutina al Día</div>
+          </div>
+        </div>
+
+        <!-- 1. RANGOS DE EDADES QUE PARTICIPARON -->
+        <div class="stats-block">
+          <div class="stats-block-title">👥 1. Rangos de Edades que Participaron</div>
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-info"><span>Menores de 30 años</span><span id="txt-age-lt30">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-age-lt30" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>30 a 39 años</span><span id="txt-age-30-39">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-age-30-39" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>40 a 49 años</span><span id="txt-age-40-49">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-age-40-49" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>50 años o más</span><span id="txt-age-gte50">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-age-gte50" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ESTUDIOS MAMOGRÁFICOS DE RUTINA -->
+        <div class="stats-block">
+          <div class="stats-block-title">🩺 2. Estado de Estudios Mamográficos de Rutina</div>
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-info"><span>Estudios al día (Últimos 12-24 meses)</span><span id="txt-mamo-ok">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-mamo-ok" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Pendiente o con turno por agendar</span><span id="txt-mamo-pending">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-mamo-pending" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Nunca se realizó una mamografía</span><span id="txt-mamo-never">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-mamo-never" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. ANTECEDENTES FAMILIARES O PERSONALES -->
+        <div class="stats-block">
+          <div class="stats-block-title">🧬 3. Presencia de Antecedentes Familiares o Personales</div>
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-info"><span>Sin antecedentes directos identificados</span><span id="txt-bg-none">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-bg-none" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Con antecedentes familiares directos (madre/hermana)</span><span id="txt-bg-family">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-bg-family" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. COMPROMISOS ASUMIDOS -->
+        <div class="stats-block">
+          <div class="stats-block-title">❤️ 4. Compromisos de Salud Asumidos en la App</div>
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-info"><span>Agendar turno de control médico</span><span id="txt-commit-schedule">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-commit-schedule" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Compartir la app con familiares/amigas</span><span id="txt-commit-share">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-commit-share" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Consultar dudas con el profesional médico</span><span id="txt-commit-consult">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-commit-consult" style="width: 0%;"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-info"><span>Sumar hábitos de ejercicio físico regular</span><span id="txt-commit-exercise">0% (0)</span></div>
+              <div class="bar-bg"><div class="bar-fill" id="bar-commit-exercise" style="width: 0%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          🔒 <strong>Privacidad Garantizada:</strong> Esta estructura reporta únicamente totales y rangos porcentuales. No recopila datos personales identificables (Nombres, DNI ni correos).
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="footer-quote">"Un control a tiempo es el mejor regalo que podés darte a vos y a quienes te aman."</p>
+    <p style="font-size: 0.85rem; opacity: 0.8;">Campaña Octubre Rosa • Prevención y Concientización</p>
+  </footer>
+
+  <div class="floating-container">
+    <!-- Botón 1: Solicitud de orden médica (Google Forms) -->
+    <a href="https://forms.gle/yXWi4CDbm3R92XQc7" class="floating-btn btn-order-form" target="_blank" rel="noopener noreferrer">
+      <svg class="action-icon" viewBox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+      </svg>
+      <span>Solicítanos tu orden médica para realizarte los estudios</span>
+    </a>
+
+    <!-- Botón 2: WhatsApp con el Isotipo Oficial -->
+    <a href="https://wa.me/5491141770744?text=Hola,%20quisiera%20realizar%20una%20consulta%20sobre%20la%20campaña%20Octubre%20Rosa" class="floating-btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+      <svg class="wa-official-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FFFFFF" d="M16 2a13 13 0 0 0-11.2 19.6L3 29l7.6-1.7A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1.9.9-4-.3-.4A10.8 10.8 0 1 1 16 25.8z"/>
+        <path fill="#FFFFFF" d="M21.9 18.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a9.2 9.2 0 0 1-2.7-1.7 10.1 10.1 0 0 1-1.9-2.3c-.2-.3 0-.5.1-.7l.5-.6c.1-.2.2-.4.3-.5.1-.2 0-.4 0-.5s-.7-1.8-1-2.4c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1.1.5a4.7 4.7 0 0 0-1.5 3.5 8.2 8.2 0 0 0 1.7 4.4 18.8 18.8 0 0 0 7.2 6.3c2.7 1.1 3.2.9 3.8.8a3.2 3.2 0 0 0 2.2-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/>
+      </svg>
+      <span>Puedes realizarnos cualquier consulta</span>
+    </a>
+  </div>
+
+  <script>
+    // State object for statistics tracking
+    const state = {
+      userTracked: false,
+      participants: 0,
+      commitmentsCount: 0,
+      age: {
+        lt30: 0,
+        age30_39: 0,
+        age40_49: 0,
+        gte50: 0
+      },
+      screening: {
+        ok: 0,
+        pending: 0,
+        never: 0
+      },
+      bg: {
+        none: 0,
+        family: 0
+      },
+      commitments: {
+        schedule: 0,
+        consult: 0,
+        share: 0,
+        exercise: 0
+      }
+    };
+
+    function registerInteraction() {
+      if (!state.userTracked) {
+        state.userTracked = true;
+        state.participants++;
+        updateDashboardUI();
+      }
+    }
+
+    function trackAgeChoice(choice) {
+      registerInteraction();
+      if (choice === '<30') state.age.lt30++;
+      else if (choice === '30-39') state.age.age30_39++;
+      else if (choice === '40-49') state.age.age40_49++;
+      else if (choice === '50+') state.age.gte50++;
+      updateDashboardUI();
+    }
+
+    function trackAntecedents(hasFamilyHistory) {
+      registerInteraction();
+      if (hasFamilyHistory) {
+        state.bg.family++;
+      } else {
+        state.bg.none++;
+      }
+      updateDashboardUI();
+    }
+
+    function trackScreeningState(status) {
+      registerInteraction();
+      if (status === 'ok') state.screening.ok++;
+      else if (status === 'pending') state.screening.pending++;
+      else if (status === 'never') state.screening.never++;
+      updateDashboardUI();
+    }
+
+    function trackInteractiveAction() {
+      registerInteraction();
+    }
+
+    function submitCommitment() {
+      const isChecked = document.getElementById('commit-trigger').checked;
+      if (!isChecked) return; // Only process on open
+
+      registerInteraction();
+      
+      const chkSchedule = document.getElementById('chk-schedule').checked;
+      const chkConsult = document.getElementById('chk-consult').checked;
+      const chkShare = document.getElementById('chk-share').checked;
+      const chkExercise = document.getElementById('chk-exercise').checked;
+
+      let added = 0;
+      if (chkSchedule) { state.commitments.schedule++; added++; }
+      if (chkConsult) { state.commitments.consult++; added++; }
+      if (chkShare) { state.commitments.share++; added++; }
+      if (chkExercise) { state.commitments.exercise++; added++; }
+
+      state.commitmentsCount += (added > 0 ? added : 1);
+      updateDashboardUI();
+    }
+
+    function updateDashboardUI() {
+      const totalP = Math.max(state.participants, 1);
+
+      // KPI
+      document.getElementById('stat-total-participantes').innerText = state.participants;
+      document.getElementById('stat-total-compromisos').innerText = state.commitmentsCount;
+      
+      const mamoOkPct = Math.round((state.screening.ok / totalP) * 100);
+      document.getElementById('stat-mamo-dia').innerText = (state.participants > 0 ? mamoOkPct : 0) + '%';
+
+      // 1. Ages
+      updateBar('age-lt30', state.age.lt30, totalP);
+      updateBar('age-30-39', state.age.age30_39, totalP);
+      updateBar('age-40-49', state.age.age40_49, totalP);
+      updateBar('age-gte50', state.age.gte50, totalP);
+
+      // 2. Screening
+      updateBar('mamo-ok', state.screening.ok, totalP);
+      updateBar('mamo-pending', state.screening.pending, totalP);
+      updateBar('mamo-never', state.screening.never, totalP);
