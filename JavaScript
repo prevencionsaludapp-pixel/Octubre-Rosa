@@ -1,0 +1,32 @@
+// Reemplazá con tu URL pública de Google Apps Script
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzw2PNIL2kkCOMeo_xtGzF-XkE2rs4HV5BX9hZOin8eiGJkKhhNmK-7m4x-0ZL0Bo6I/exec";
+
+function sendDataToGoogleSheets(dataPayload) {
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors", // Requerido para peticiones directas a Apps Script
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(dataPayload)
+  })
+  .then(() => console.log("Métricas sincronizadas con Google Sheets"))
+  .catch(err => console.error("Error al enviar a Sheets:", err));
+}
+
+// Ejemplo de uso: al guardar compromisos en la app
+function saveCommitments() {
+  let metrics = getMetrics();
+  metrics.commitmentsTotal += selectedCommitments.size;
+  saveMetrics(metrics);
+  
+  // Enviar evento a la planilla online
+  sendDataToGoogleSheets({
+    visits: metrics.visits,
+    riskCompleted: metrics.riskCompleted,
+    quizAnswered: metrics.quizAnswered,
+    commitmentsTotal: selectedCommitments.size
+  });
+
+  alert('¡Gracias por tu compromiso con la prevención!');
+}
